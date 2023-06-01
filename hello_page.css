@@ -11,17 +11,22 @@
     min-height: 100%;
 }
 
+#hello_container {
+    position: absolute;
+    margin-top: 125px;
+    width: 100%;
+    height: auto;
+    left: 0;
+    text-align: center;
+}
+
 #hello_text {
     /*Позиция*/
-    position: absolute;
-    top: 30%;
-    left: 0;
-    width: 100%;
-    text-align: center;
+    width: auto;
 
     /*Настройки текста*/
     color: white;
-    font-size: 400%;
+    font-size: 80px;
     font-weight: 700;
     font-family: 'Comfortaa', cursive;
     font-family: 'Montserrat Alternates', sans-serif;
@@ -30,17 +35,48 @@
 
 #hello_textfield {
     /*Позиция*/
-    position: absolute;
-    top: 50%;
-    left: 37%;
     width: 25%;
     text-align: center;
 
+    /*Форма*/
+    border-radius: 12px;
+    border: 2px solid #D24D57;
+    background-color: rgba(0, 0, 0, 0.186);
+
     /*Настройки текста*/
-    color: black;
-    font-size: 100%;
+    color: white;
+    font-size: 40px;
     font-weight: 700;
     font-family: 'Comfortaa', cursive;
     font-family: 'Montserrat Alternates', sans-serif;
     font-family: 'Oswald', sans-serif;
+}
+
+#next_btn {
+    /*Позиция*/
+    margin-top: 15px;
+
+    /*Форма и цвета кнопки*/
+    border-radius: 8px;
+    border: 2px solid #D24D57;
+    background-color: rgba(255, 0, 0, 0.186);
+    transition: .15s ease-in-out;
+
+    /*Настройки текста*/
+    color: white;
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: 'Oswald', sans-serif;
+}
+
+#next_btn:hover {
+    background-color: #D24D57;
+}
+
+#next_btn:active {
+    font-size: 35px;
+    transition: .05s ease-in-out;
+    background-color: #3a1616;
 }
