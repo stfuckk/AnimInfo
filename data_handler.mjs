@@ -1,27 +1,34 @@
 // Данный модуль отвечает за запросы к API и подготовку объектов для передачи в модуль display.
 
 import { Anilibria } from "anilibria-api-wrapper";
-import { all } from "axios";
 
 const anilibriaApi = new Anilibria();
 
+
+// данная функция используется при открытии главного окна страницы
 async function get_latest_titles() {
-    // получаем список обновлений тайтлов в хронологическом порядке, исключая обновления на youtube
+
+    // получаем список последних обновлений в хронологическом порядке, исключая обновления на youtube
     await anilibriaApi.getFeed({
-        remove: 'youtube',
-        limit: 10
+        limit: 10, description_type: 'no_view_order'
     }).then(response => {
         let data = response.data;
         let titles = [];
-        data.forEach(element => {
 
-            console.log(element['title']['posters']['medium']['url']); 
-            // ссылка подставляется к домену анилибрии, который заблокирован в РФ,
-            // поэтому картинку будем вытаскивать из зеркала https://vk.anilib.top/
+        // создаем объект по каждому тайтлу и добавляем в список titles
+        data.forEach(element => {
+            if (element['title']) {
+                let title = {
+                    'id': element['title']['id'],
+                    'name': element['title']['names']['ru'],
+                    'poster': 'https://vk.anilib.top' + element['title']['posters']['small']['url'],
+                    'description': (element['title']['description']).split('\n\n')[0]
+                };
+                titles.push(title);
+            }
         });
+        return titles;
     });
 }
-
-get_latest_titles();
 
 export { get_latest_titles };
