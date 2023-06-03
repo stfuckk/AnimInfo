@@ -7,12 +7,20 @@ import { get_latest_titles } from "./data_handler.mjs"
 const hello_container = document.getElementById('hello_container')
 const bgVideo = document.getElementById('bgVideo');
 const main_container = document.getElementById('main_container');
+const hello_textfield = document.getElementById('hello_textfield');
 
 
 // При нажатии на next_btn, мы проверяем ввод имени и если имя введено, то скрываем стартовые
 // элементы и запускаем страницу с отображенными тайтлами.
 next_btn.addEventListener('click', async () => {
     if (hello_textfield.value !== '') {
+        //Приветственное сообщение
+        const hello_header = document.createElement('h3');
+        hello_header.id = 'hello_header';
+        hello_header.textContent = `Привет, ${hello_textfield.value}!`;
+        main_container.appendChild(hello_header);
+
+        // загружаем тайтлы
         hello_container.remove();
         const div = document.createElement('div');
         div.id = 'loading_container';
@@ -20,7 +28,6 @@ next_btn.addEventListener('click', async () => {
         main_container.appendChild(div);
         bgVideo.style.opacity = '50%';
         const titles = await get_latest_titles();
-        //bgVideo.remove();
         display_titles(titles);
         div.remove();
     }

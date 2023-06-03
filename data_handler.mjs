@@ -5,9 +5,9 @@ const anilibriaApiURL = 'https://api.anilibria.tv/v2/';
 
 // данная функция используется при открытии главного окна страницы
 async function get_latest_titles() {
-    let json
+    let json;
     // получаем список последних обновлений в хронологическом порядке, исключая обновления на youtube
-    let response = await fetch(anilibriaApiURL + 'getFeed?limit=10')
+    let response = await fetch(anilibriaApiURL + 'getFeed?limit=10');
     if (response.ok) {
         json = await response.json();
     }
@@ -25,7 +25,9 @@ async function get_latest_titles() {
                 'id': element['title']['id'],
                 'name': element['title']['names']['ru'],
                 'poster': 'https://vk.anilib.top' + element['title']['posters']['original']['url'], // https://static-libria.weekstorm.one https://vk.anilib.top https://dl-20230603-6.anilib.one
-                'description': (element['title']['description']).split('\n\n')[0]
+                'description': (element['title']['description']).split('\n\n')[0],
+                'series_count': element['type']['series'],
+                'genres': element['genres'].join(', ')
             };
             titles.push(title);
         }
@@ -33,4 +35,33 @@ async function get_latest_titles() {
     return titles;
 }
 
-export { get_latest_titles };
+async function search_titles(title_name) { 
+    let json
+    let response = await fetch(anilibriaApiURL + `searchTitles?search=${title_name}`);
+    if (response.ok) {
+        json = await response.json();
+    }
+    else {
+        return 'Ничего не найдено'
+    }
+    
+    let titles = [];
+
+    // создаем объект по каждому тайтлу
+    json.forEach(element => {
+        if (element['id']) {
+            let title = {
+                'id': element['id'],
+                'name': element['names']['ru'],
+                'poster': 'https://vk.anilib.top' + element['posters']['original']['url'], // https://static-libria.weekstorm.one https://vk.anilib.top https://dl-20230603-6.anilib.one
+                'description': (element['description']).split('\n\n')[0],
+                'series_count': element['type']['series'],
+                'genres': element['genres'].join(', ')
+            };
+            titles.push(title);
+        }
+    });
+    return titles;
+}
+
+export { get_latest_titles, search_titles };
