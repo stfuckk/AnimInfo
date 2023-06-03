@@ -1,34 +1,36 @@
 // Данный модуль отвечает за запросы к API и подготовку объектов для передачи в модуль display.
 
-import { Anilibria } from "anilibria-api-wrapper";
-
-const anilibriaApi = new Anilibria();
+const anilibriaApiURL = 'https://api.anilibria.tv/v2/';
 
 
 // данная функция используется при открытии главного окна страницы
 async function get_latest_titles() {
-
+    let json
     // получаем список последних обновлений в хронологическом порядке, исключая обновления на youtube
-    await anilibriaApi.getFeed({
-        limit: 10, description_type: 'no_view_order'
-    }).then(response => {
-        let data = response.data;
-        let titles = [];
+    let response = await fetch(anilibriaApiURL + 'getFeed?limit=10')
+    if (response.ok) {
+        json = await response.json();
+    }
+    else {
+        alert('Ошибка HTTP: ' + response.status);
+    }
 
-        // создаем объект по каждому тайтлу и добавляем в список titles
-        data.forEach(element => {
-            if (element['title']) {
-                let title = {
-                    'id': element['title']['id'],
-                    'name': element['title']['names']['ru'],
-                    'poster': 'https://vk.anilib.top' + element['title']['posters']['small']['url'],
-                    'description': (element['title']['description']).split('\n\n')[0]
-                };
-                titles.push(title);
-            }
-        });
-        return titles;
+
+    let titles = [];
+
+    // создаем объект по каждому тайтлу и добавляем в список titles
+    json.forEach(element => {
+        if (element['title']) {
+            let title = {
+                'id': element['title']['id'],
+                'name': element['title']['names']['ru'],
+                'poster': 'https://vk.anilib.top' + element['title']['posters']['original']['url'], // https://static-libria.weekstorm.one https://vk.anilib.top https://dl-20230603-6.anilib.one
+                'description': (element['title']['description']).split('\n\n')[0]
+            };
+            titles.push(title);
+        }
     });
+    return titles;
 }
 
 export { get_latest_titles };
