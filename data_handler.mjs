@@ -26,8 +26,8 @@ async function get_latest_titles() {
                 'name': element['title']['names']['ru'],
                 'poster': 'https://vk.anilib.top' + element['title']['posters']['original']['url'], // https://static-libria.weekstorm.one https://vk.anilib.top https://dl-20230603-6.anilib.one
                 'description': (element['title']['description']).split('\n\n')[0],
-                'series_count': element['type']['series'],
-                'genres': element['genres'].join(', ')
+                'series_count': element['title']['type']['series'],
+                'genres': element['title']['genres'].join(', ')
             };
             titles.push(title);
         }
