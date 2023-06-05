@@ -1,7 +1,7 @@
 // Данный модуль отвечает за отображение данных, принятых из модуля data_handler
 // при нажатии различных кнопок, чекбоксов и т.п.
 
-import { get_latest_titles } from "./data_handler.mjs"
+import { get_latest_titles, search_titles } from "./data_handler.mjs"
 
 // Начальные элементы приветственной страницы
 const hello_container = document.getElementById('hello_container')
@@ -26,7 +26,7 @@ next_btn.addEventListener('click', async () => {
         div.id = 'loading_container';
         div.innerHTML = `<image src="./media/loading.png" width=25% height=25% id='loading_image'></image>`
         main_container.appendChild(div);
-        bgVideo.style.opacity = '50%';
+        bgVideo.style.opacity = '60%';
         const titles = await get_latest_titles();
         display_titles(titles);
         div.remove();
@@ -88,8 +88,72 @@ function display_titles(titles) {
     search_btn.classList.add('search_btn');
     search_container.appendChild(search_btn);
 
-    search_btn.addEventListener('click', () => {
+    search_btn.addEventListener('click', async () => {
         const query = search_input.value;
-        //searchTitle(query);
+        const titles = await search_titles(query);
+        show_search_list(titles)
+    });
+}
+
+function show_search_list(titles) {
+    // создаем блок со списком
+    const result_container = document.createElement('div');
+    result_container.classList.add('result_container');
+    let search_container = document.getElementsByClassName('search_container')[0];
+    search_container.appendChild(result_container);
+
+    titles.forEach(title => {
+        const title_div = document.createElement('div');
+        title_div.classList.add('s_title_div');
+        result_container.appendChild(title_div);
+
+        const poster_img = document.createElement('img');
+        poster_img.src = title.poster;
+        poster_img.alt = `${title.name} poster`;
+        poster_img.classList.add('s_poster_img');
+        title_div.appendChild(poster_img);
+
+        const name_p = document.createElement('p');
+        name_p.textContent = title.name;
+        name_p.classList.add('name_p');
+        title_div.appendChild(name_p);
+
+        const genres = document.createElement('p');
+        genres.classList.add('s_genres');
+        genres.textContent = title.genres;
+        title_div.appendChild(genres);
+
+        title_div.addEventListener('click', () => {
+            // Скрываем блок со списком найденных тайтлов
+            result_container.style.display = 'none';
+
+            // Создаем блок с подробной информацией о выбранном тайтле
+            const detail_container = document.createElement('div');
+            detail_container.classList.add('detail_container');
+            main_container.appendChild(detail_container);
+
+            //постер
+            const poster_img = document.createElement('img');
+            poster_img.src = title.poster;
+            poster_img.alt = `${title.name} poster`;
+            poster_img.classList.add('poster_img');
+            detail_container.appendChild(poster_img);
+            //название
+            const name_h3 = document.createElement('h3');
+            name_h3.textContent = title.name;
+            detail_container.appendChild(name_h3);
+            //описание
+            const desc_p = document.createElement('p');
+            desc_p.textContent = title.description;
+            detail_container.appendChild(desc_p);
+            //количество серий
+            const series_count_p = document.createElement('p');
+            series_count_p.textContent = `Количество серий: ${title.series_count}`;
+            detail_container.appendChild(series_count_p);
+            //жанры
+            const genres_p = document.createElement('p');
+            genres_p.textContent = `Жанры: ${title.genres}`;
+            detail_container.appendChild(genres_p);
+        });
     });
 }
