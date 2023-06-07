@@ -45,6 +45,7 @@ body {
     }
 }
 
+/*----------------Лента-------------*/
 #title_container {
     display: flex;
     flex-direction: column;
@@ -55,6 +56,8 @@ body {
     width: 75%;
     height: auto;
     color: white;
+    transition: .2s;
+    animation: s_anim 3s forwards;
 }
 
 #main_header {
@@ -74,6 +77,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.501);
+
 }
 
 .poster_img {
@@ -102,6 +106,7 @@ body {
     font-family: 'Oswald', sans-serif;
 }
 
+/*----------------Поиск-------------*/
 .search_container {
     display: flex;
     flex-direction: row;
@@ -124,7 +129,7 @@ body {
     border-radius: 8px;
     border: 2px solid #D24D57;
     background-color: rgba(255, 0, 0, 0.186);
-    transition: .15s ease-in-out;
+    transition: .1s ease-in-out;
     color: white;
     font-size: 20px;
     font-weight: 700;
@@ -143,11 +148,18 @@ body {
     background-color: #3a1616;
 }
 
+.search_btn:disabled {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    font-size: 20px;
+}
+
 .s_title_div {
     display: flex;
     flex-direction: row;
-    margin-top: 2px;
-    height: 100px;
+    margin-top: 15px;
+    height: auto;
     width: auto;
     border: 2px solid rgba(239, 4, 4, 0.489);
     border-radius: 10px;
@@ -159,28 +171,68 @@ body {
     font-family: 'Comfortaa', cursive;
     font-family: 'Montserrat Alternates', sans-serif;
     font-family: 'Oswald', sans-serif;
+    transition: .2s;
+    animation: s_anim 1s forwards;
+}
+
+@keyframes s_anim {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .s_title_div:hover {
     border: 2px solid white;
+    transform: scale(1.15);
 }
 
 .name_p {
     margin-left: 15px;
     font-size: 20px;
+    pointer-events: none;
 }
 
 .genres {
     margin-left: 15px;
     font-size: 15px;
+    pointer-events: none;
 }
 
 .s_poster_img {
-    height: 95%;
+    height: 7em;
     width: auto;
+    pointer-events: none;
 }
 
+.not_found_container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    size: auto;
+    border: 2px solid rgba(239, 4, 4, 0.489);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.501);
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: 'Oswald', sans-serif;
+    transition: .2s;
+    animation: s_anim .5s forwards;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+/*----------------Окно с деталями об аниме-------------*/
 .detail_container {
+    margin-top: 100px;
     display: flex;
     flex-direction: row;
     border: 2px solid rgba(239, 4, 4, 0.489);
@@ -194,4 +246,38 @@ body {
     font-family: 'Montserrat Alternates', sans-serif;
     font-family: 'Oswald', sans-serif;
     gap: 20px;
+    width: 75%;
+    height: 75%;
+    transition: .2s;
+    animation: s_anim 2s forwards;
+}
+
+.info_block {
+    flex-direction: column;
+    padding-right: 20px;
+}
+
+.close_btn {
+    aspect-ratio: 1/1;
+    align-self: flex-start;
+    margin-right: 5px;
+    margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    font-weight: 700;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 6px;
+    border: 2px solid rgba(239, 4, 4, 0.489);
+    color: rgb(255, 0, 0);
+}
+
+.close_btn:hover {
+    background-color: #fc000082;
+}
+
+.close_btn:active {
+    transform: scale(.9);
+    font-size: 20px;
+    background-color: #000000;
 }

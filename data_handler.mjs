@@ -53,7 +53,7 @@ async function search_titles(title_name) {
             let title = {
                 'id': element['id'],
                 'name': element['names']['ru'],
-                'poster': 'https://vk.anilib.top' + element['posters']['original']['url'], // https://static-libria.weekstorm.one https://vk.anilib.top https://dl-20230603-6.anilib.one
+                'poster': 'https://dl-20230603-6.anilib.one' + element['posters']['original']['url'], // https://static-libria.weekstorm.one https://vk.anilib.top https://dl-20230603-6.anilib.one
                 'description': (element['description']).split('\n\n')[0],
                 'series_count': element['type']['series'],
                 'genres': element['genres'].join(', ')
