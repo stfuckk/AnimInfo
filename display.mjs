@@ -66,6 +66,7 @@ function display_titles(titles) {
         poster_img.src = title.poster;
         poster_img.alt = `${title.name} poster`;
         poster_img.classList.add('poster_img');
+        poster_img.draggable = false;
         title_div.appendChild(poster_img);
 
         const info_div = document.createElement('div');
@@ -200,6 +201,7 @@ function show_search_list(titles, query) {
             const poster_img = document.createElement('img');
             poster_img.src = title.poster;
             poster_img.alt = `${title.name} poster`;
+            poster_img.draggable = false;
             poster_img.classList.add('poster_img');
             detail_container.appendChild(poster_img);
 
