@@ -8,11 +8,13 @@ const hello_container = document.getElementById('hello_container')
 const bgVideo = document.getElementById('bgVideo');
 const main_container = document.getElementById('main_container');
 const hello_textfield = document.getElementById('hello_textfield');
+const next_btn = document.getElementById('next_btn');
 
-
+// --------------------------БЛОК ПРИВЕТСТВЕННОЙ СТРАНИЦЫ-----------------------
 // При нажатии на next_btn, мы проверяем ввод имени и если имя введено, то скрываем стартовые
 // элементы и запускаем страницу с отображенными тайтлами.
-next_btn.addEventListener('click', async () => {
+next_btn.addEventListener('click', async (event) => {
+    event.preventDefault();
     if (hello_textfield.value !== '') {
         //Приветственное сообщение
         const hello_header = document.createElement('h3');
@@ -34,7 +36,14 @@ next_btn.addEventListener('click', async () => {
     else input_err.hidden = false;
 });
 
+// Добавляем подтверждение имени на кнопку Enter
+hello_textfield.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        next_btn.click();
+    }
+});
 
+// --------------------------БЛОК ОСНОВНОЙ СТРАНИЦЫ-----------------------
 // Отображает информацию на основной странице, а также создает дополнительные элементы управления 
 function display_titles(titles) {
 
@@ -47,6 +56,7 @@ function display_titles(titles) {
     title_container.id = 'title_container';
     main_container.appendChild(title_container);
 
+    // Добавляем список тайтлов
     for (const title of titles) {
         const title_div = document.createElement('div');
         title_div.classList.add('title_div');
@@ -92,15 +102,26 @@ function display_titles(titles) {
         const query = search_input.value;
         const titles = await search_titles(query);
         show_search_list(titles)
+        //
+        if (document.getElementsByClassName('result_container')[0]) {
+            document.getElementsByClassName('result_container')[0].remove();
+        }
+    });
+
+    search_input.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            search_btn.click();
+        }
     });
 }
 
 function show_search_list(titles) {
     // создаем блок со списком
     const result_container = document.createElement('div');
+
     result_container.classList.add('result_container');
-    let search_container = document.getElementsByClassName('search_container')[0];
-    search_container.appendChild(result_container);
+    main_container.insertBefore(result_container, title_container)
+
 
     titles.forEach(title => {
         const title_div = document.createElement('div');
@@ -113,19 +134,27 @@ function show_search_list(titles) {
         poster_img.classList.add('s_poster_img');
         title_div.appendChild(poster_img);
 
+        const s_info = document.createElement('div');
+        s_info.classList.add('s_info');
+        title_div.appendChild(s_info);
+
         const name_p = document.createElement('p');
-        name_p.textContent = title.name;
         name_p.classList.add('name_p');
-        title_div.appendChild(name_p);
+        name_p.textContent = title.name;
+        s_info.appendChild(name_p);
 
         const genres = document.createElement('p');
-        genres.classList.add('s_genres');
         genres.textContent = title.genres;
-        title_div.appendChild(genres);
+        genres.classList.add('genres');
+        s_info.appendChild(genres);
 
         title_div.addEventListener('click', () => {
-            // Скрываем блок со списком найденных тайтлов
-            result_container.style.display = 'none';
+            // удаляем блок со списком найденных тайтлов
+            result_container.remove();
+            
+            // очищаем поле поиска
+            document.getElementsByClassName('search_input')[0].value = '';
+            
 
             // Создаем блок с подробной информацией о выбранном тайтле
             const detail_container = document.createElement('div');

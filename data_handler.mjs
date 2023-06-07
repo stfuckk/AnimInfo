@@ -7,7 +7,7 @@ const anilibriaApiURL = 'https://api.anilibria.tv/v2/';
 async function get_latest_titles() {
     let json;
     // получаем список последних обновлений в хронологическом порядке, исключая обновления на youtube
-    let response = await fetch(anilibriaApiURL + 'getFeed?limit=10');
+    let response = await fetch(anilibriaApiURL + 'getFeed?limit=20');
     if (response.ok) {
         json = await response.json();
     }
@@ -24,7 +24,7 @@ async function get_latest_titles() {
             let title = {
                 'id': element['title']['id'],
                 'name': element['title']['names']['ru'],
-                'poster': 'https://vk.anilib.top' + element['title']['posters']['original']['url'], // https://static-libria.weekstorm.one https://vk.anilib.top https://dl-20230603-6.anilib.one
+                'poster': 'https://dl-20230603-6.anilib.one' + element['title']['posters']['original']['url'], // https://static-libria.weekstorm.one https://vk.anilib.top https://dl-20230603-6.anilib.one
                 'description': (element['title']['description']).split('\n\n')[0],
                 'series_count': element['title']['type']['series'],
                 'genres': element['title']['genres'].join(', ')

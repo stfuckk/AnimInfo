@@ -14,10 +14,11 @@
     </video>
     <div id='hello_container'>
         <h2 id="hello_text">Добро пожаловать на AnimInfo!</h2>
-        <input type="text" name="userName" id="hello_textfield" placeholder="Имя" maxlength="20" />
-        <br>
-        <p id="input_err" hidden>ВВЕДИТЕ ВАШЕ ИМЯ</p>
-        <button type="button" name="nextBtn" id="next_btn"> ВХОД </button>
+        <div>
+            <input type="text" name="userName" id="hello_textfield" placeholder="Имя" maxlength="20" /> <br>
+            <button type="button" name="nextBtn" id="next_btn"> ВХОД </button>
+            <p id="input_err" hidden>ВВЕДИТЕ ВАШЕ ИМЯ</p>
+        </div>
         <!-- подключаем модули -->
         <script type="module" src="./data_handler.mjs"></script>
         <script type="module" src="./display.mjs"></script>

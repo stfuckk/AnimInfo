@@ -5,11 +5,14 @@ body {
     background-color: black;
 }
 
-#hello_header {
+#main_container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#hello_header {
     margin-top: 5px;
     color: white;
     font-size: 25px;
@@ -43,13 +46,12 @@ body {
 }
 
 #title_container {
-    margin-left: 100px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 30px;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 75%;
     height: auto;
     color: white;
@@ -76,8 +78,8 @@ body {
 
 .poster_img {
     margin: 20px;
-    width: 250px;
-    height: 300px;
+    width: 300px;
+    height: 350px;
     object-fit: cover;
     border-radius: 10px 0 0 10px;
     transition: 0.5s;
@@ -93,7 +95,7 @@ body {
     justify-content: center;
     gap: 10px;
     padding: 10px;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
     font-family: 'Comfortaa', cursive;
     font-family: 'Montserrat Alternates', sans-serif;
@@ -102,15 +104,15 @@ body {
 
 .search_container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    width: 50%;
     align-items: center;
-    margin-top: 25px;
 }
 
 .search_input {
     text-align: left;
-    width: 50%;
+    width: 100%;
     font-size: 20px;
     font-weight: 700;
     font-family: 'Comfortaa', cursive;
@@ -119,9 +121,6 @@ body {
 }
 
 .search_btn {
-    position: absolute;
-    top: 7%;
-    margin-left: 60%;
     border-radius: 8px;
     border: 2px solid #D24D57;
     background-color: rgba(255, 0, 0, 0.186);
@@ -147,20 +146,19 @@ body {
 .s_title_div {
     display: flex;
     flex-direction: row;
-    margin-top: 5px;
-    height: 75px;
-    width: 350px;
+    margin-top: 2px;
+    height: 100px;
+    width: auto;
     border: 2px solid rgba(239, 4, 4, 0.489);
     border-radius: 10px;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.501);
     color: white;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
     font-family: 'Comfortaa', cursive;
     font-family: 'Montserrat Alternates', sans-serif;
     font-family: 'Oswald', sans-serif;
-    gap: 20px;
 }
 
 .s_title_div:hover {
@@ -168,15 +166,18 @@ body {
 }
 
 .name_p {
-    margin-top: auto;
+    margin-left: 15px;
+    font-size: 20px;
 }
 
-.s_genres {
-    font-size: 12px;
-    margin-top: auto;
-    text-align: right;
-    font-weight: 500;
-    margin-right: 5px;
+.genres {
+    margin-left: 15px;
+    font-size: 15px;
+}
+
+.s_poster_img {
+    height: 95%;
+    width: auto;
 }
 
 .detail_container {
