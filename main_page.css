@@ -28,11 +28,12 @@ body {
 }
 
 #loading_container {
-    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
     width: 50%;
     height: 50%;
-    left: 50%;
-    top: 50%;
     pointer-events: none;
 }
 
@@ -74,6 +75,7 @@ body {
 
 .title_div {
     display: flex;
+    flex-direction: row;
     gap: 20px;
     width: 100%;
     height: auto;
@@ -81,14 +83,24 @@ body {
     border-radius: 10px;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.501);
+}
 
+.poster_div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: 'Oswald', sans-serif;
 }
 
 .poster_img {
     margin: 20px;
     width: 300px;
     height: 350px;
-    object-fit: cover;
     border-radius: 10px 0 0 10px;
     transition: 0.5s;
 }
@@ -115,7 +127,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 50%;
+    width: 50em;
     align-items: center;
 }
 
@@ -284,4 +296,39 @@ body {
     transform: scale(.9);
     font-size: 20px;
     background-color: #000000;
+}
+
+/*----------------Кнопка получения рандомного тайтла-------------*/
+.random_btn {
+    border-radius: 8px;
+    border: 2px solid #D24D57;
+    background-color: rgba(255, 0, 0, 0.186);
+    transition: .1s ease-in-out;
+    color: white;
+    margin-left: 50px;
+    text-align: left;
+    width: 400px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: 'Oswald', sans-serif;
+}
+
+.random_btn:hover {
+    background-color: #D24D57;
+}
+
+.random_btn:active {
+    font-size: 17px;
+    transition: .05s ease-in-out;
+    background-color: #3a1616;
+}
+
+.random_btn:disabled {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    font-size: 20px;
 }
