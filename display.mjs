@@ -29,6 +29,7 @@ next_btn.addEventListener('click', async (event) => {
         div.innerHTML = `<image src="./media/loading.png" width=25% height=25% id='loading_image'></image>`
         main_container.appendChild(div);
         bgVideo.style.opacity = '60%';
+
         const titles = await get_latest_titles();
         display_titles(titles);
         div.remove();
@@ -132,8 +133,18 @@ function add_search() {
         // здесь мы начинаем поиск по запросу query и отображаем список найденных тайтлов
         if (!document.querySelector(".result_container")) {
             const query = search_input.value;
+
+            const div = document.createElement('div');
+            if (!document.querySelector('#loading_container')) {
+                div.id = 'loading_container';
+                div.innerHTML = `<image src="./media/loading.png" width=25% height=25% id='loading_image'></image>`
+                main_container.insertBefore(div, title_container);
+            }
+
             const titles = await search_titles(query);
             show_search_list(titles, query)
+
+            div.remove();
         }
         else {
             document.querySelector(".result_container").remove();
@@ -141,12 +152,22 @@ function add_search() {
         }
     });
 
-    search_input.addEventListener('keydown', async (event) => {
+    search_input.addEventListener('keyup', async (event) => {
         if (event.key === 'Enter') {
             if (!document.querySelector(".result_container")) {
                 const query = search_input.value;
+
+                const div = document.createElement('div');
+                if (!document.querySelector('#loading_container')) {
+                    div.id = 'loading_container';
+                    div.innerHTML = `<image src="./media/loading.png" width=25% height=25% id='loading_image'></image>`
+                    main_container.insertBefore(div, title_container);
+                }
+
                 const titles = await search_titles(query);
                 show_search_list(titles, query)
+
+                div.remove();
             }
             else {
                 document.querySelector(".result_container").remove();
@@ -312,7 +333,9 @@ function add_random_btn() {
         // удаляем блок со списком найденных тайтлов
         if (document.querySelector('.result_container'))
             result_container.remove();
-
+        // удаляем сообщение о ненайденных тайтлах
+        if (document.querySelector('.not_found_container'))
+            document.querySelector('.not_found_container').remove();
         // скрываем блок с интересными обновлениями
         document.querySelector("#title_container").style.display = 'none';
 

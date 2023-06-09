@@ -2,6 +2,7 @@
 
 const anilibriaApiURL = 'https://api.anilibria.tv/v2/';
 
+
 // данная функция используется при открытии главного окна страницы
 async function get_latest_titles() {
     let json;
@@ -36,7 +37,7 @@ async function get_latest_titles() {
 }
 
 // данная функция используется при запросе поиска
-async function search_titles(title_name) { 
+async function search_titles(title_name) {
     let json
     let response = await fetch(anilibriaApiURL + `searchTitles?search=${title_name}`);
     if (response.ok) {
@@ -45,7 +46,7 @@ async function search_titles(title_name) {
     else {
         alert('Ошибка HTTP: ' + response.status + '\nПосле исправления ошибки, обновите страницу.');
     }
-    
+
     let titles = [];
 
     // создаем объект по каждому тайтлу
@@ -68,14 +69,23 @@ async function search_titles(title_name) {
 
 // данная функция используется для получения рандомного тайтла из базы anilibria
 async function get_random() {
+    let is_good = false;
     let json;
+    while (is_good === false) {
+        let response = await fetch(anilibriaApiURL + 'getRandomTitle');
+        if (response.ok) {
+            json = await response.json();
+        }
+        else {
+            alert('Ошибка HTTP: ' + response.status + '\nПосле исправления ошибки, обновите страницу.');
+        }
 
-    let response = await fetch(anilibriaApiURL + 'getRandomTitle');
-    if (response.ok) {
-        json = await response.json();
-    }
-    else {
-        alert('Ошибка HTTP: ' + response.status + '\nПосле исправления ошибки, обновите страницу.');
+        is_good = true;
+        let bad_genres = ["Гарем", "Дзёсей", "Сёдзе-ай", "Сейнен", "Этти", "Романтика"];
+        bad_genres.forEach(element => {
+            if (json.genres.includes(element))
+                is_good = false;
+        });
     }
 
     let title = {
@@ -89,4 +99,19 @@ async function get_random() {
     }
     return title;
 }
+
+// неэкспортируемая функция, которая вернет набор жанров для последующей фильтрации по ним
+async function get_genres() {
+    let json;
+
+    let response = await fetch(anilibriaApiURL + 'getGenres');
+    if (response.ok) {
+        json = await response.json();
+    }
+    else {
+        alert('Ошибка HTTP: ' + response.status + '\nПосле исправления ошибки, обновите страницу.');
+    }
+    return json;
+}
+
 export { get_latest_titles, search_titles, get_random };
