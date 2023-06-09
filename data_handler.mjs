@@ -88,6 +88,10 @@ async function get_random() {
         });
     }
 
+    if (json.description === null) {
+        return get_random();
+    }
+
     let title = {
         'id': json.id,
         'name': json.names.ru,

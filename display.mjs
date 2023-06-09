@@ -328,8 +328,19 @@ function add_random_btn() {
     random_btn.addEventListener('click', async () => {
         // отключаем данную кнопку
         random_btn.disabled = true;
+
+        const div = document.createElement('div');
+        if (!document.querySelector('#loading_container')) {
+            div.id = 'loading_container';
+            div.innerHTML = `<image src="./media/loading.png" width=25% height=25% id='loading_image'></image>`
+            main_container.insertBefore(div, title_container);
+        }
+
         // получаем рандомный тайтл
         const random_title = await get_random();
+
+        div.remove();
+
         // удаляем блок со списком найденных тайтлов
         if (document.querySelector('.result_container'))
             result_container.remove();
