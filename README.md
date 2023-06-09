@@ -1,13 +1,13 @@
 ## Учебный проект "AnimInfo" - фронтенд на JS с использованием API Anilibria V2
 ##### Реализованные функции, доступные при открытии страницы:
 ###### - Приветственная страница, где можно ввести имя пользователя:
-![hello_page](https://github.com/stfuckk/AnimInfo/screenshots/hello_page.png)
+![hello_page](https://github.com/stfuckk/AnimInfo/blob/main/screenshots/hello_page.png)
 ###### - Лента "интересных обновлений тайтлов":
-![main_feed](https://github.com/stfuckk/AnimInfo/screenshots/main_feed.png)
+![main_feed](https://github.com/stfuckk/AnimInfo/blob/main/screenshots/main_feed.png)
 ###### - Блок поиска тайтлов (поле ввода + кнопка):
-![main_search](https://github.com/stfuckk/AnimInfo/screenshots/main_search.png)
+![main_search](https://github.com/stfuckk/AnimInfo/blob/main/screenshots/main_search.png)
 ###### - Кнопка, отображающая информацию о случайном тайтле из базы:
-![main_random_btn](https://github.com/stfuckk/AnimInfo/screenshots/main_random_btn.png)
+![main_random_btn](https://github.com/stfuckk/AnimInfo/blob/main/screenshots/main_random_btn.png)
 
 ##### Описание модулей:
 > - **data_handler.mjs** используется для работы с API и распаковки json ответов с последующей отправкой в модуль display.mjs.
