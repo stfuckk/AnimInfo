@@ -1,4 +1,4 @@
-## Учебный проект "AnimInfo" - фронтенд на JS с использованием API Anilibria V2
+## Учебный проект "AnimInfo" - фронтенд на JS (html + css) с использованием API Anilibria V2
 ##### Реализованные функции, доступные при открытии страницы:
 ###### - Приветственная страница, где можно ввести имя пользователя:
 ![hello_page](https://github.com/stfuckk/AnimInfo/blob/main/screenshots/hello_page.png)
