@@ -51,7 +51,7 @@ hello_textfield.addEventListener('keydown', function (event) {
 });
 
 // --------------------------БЛОК ОСНОВНОЙ СТРАНИЦЫ-----------------------
-// Отображает информацию на основной странице, а также создает дополнительные элементы управления 
+// Отображает информацию на основной странице.
 function display_titles(titles) {
 
     // Создаем блок с последними обновлениями Anilibria
@@ -343,7 +343,7 @@ function add_random_btn() {
 
         // удаляем блок со списком найденных тайтлов
         if (document.querySelector('.result_container'))
-            result_container.remove();
+        document.querySelector('.result_container').remove();
         // удаляем сообщение о ненайденных тайтлах
         if (document.querySelector('.not_found_container'))
             document.querySelector('.not_found_container').remove();
